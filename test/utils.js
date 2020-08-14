@@ -11,10 +11,10 @@ const mongod = new MongoMemoryServer({
 
 const setup = async () => {
   await mongod.start();
-  if (mongod.instanceInfoSync.port !== port) {
-    throw new Error(`Failed to startup, :${port} already in use`);
-  }
-  await mongoose.connect(`mongodb://localhost/test`,
+  if (mongod.instanceInfoSync.port !== port) throw new Error(`Failed to startup, :${port} already in use`);
+
+  const url="mongodb://127.0.0.1:27017/petsData";
+  await mongoose.connect(url,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
